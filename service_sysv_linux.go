@@ -222,6 +222,9 @@ case "$1" in
             echo "Already started"
         else
             echo "Starting $name"
+			{{ if .Option.LimitMEMLOCK }}ulimit -l {{.Option.LimitMEMLOCK}}
+			{{ if .Option.LimitNOFILE }}ulimit -n {{.Option.LimitNOFILE}}
+			{{ if .Option.LimitNPROC }}ulimit -u {{.Option.LimitNPROC}}
             {{if .WorkingDirectory}}cd '{{.WorkingDirectory}}'{{end}}
             $cmd >> "$stdout_log" 2>> "$stderr_log" &
             echo $! > "$pid_file"

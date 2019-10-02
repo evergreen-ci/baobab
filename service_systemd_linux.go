@@ -260,9 +260,9 @@ ExecStart={{.Path|cmdEscape}}{{range .Arguments}} {{.|cmd}}{{end}}
 {{if .UserName}}User={{.UserName}}{{end}}
 {{if .ReloadSignal}}ExecReload=/bin/kill -{{.ReloadSignal}} "$MAINPID"{{end}}
 {{if .PIDFile}}PIDFile={{.PIDFile|cmd}}{{end}}
-{{if ne .Option.LimitNOFILE 0 }}LimitNOFILE={{.Option.LimitNOFILE}}{{end}}
-{{if ne .Option.LimitNPROC 0 }}LimitNPROC={{.Option.LimitNPROC}}{{end}}
-{{if ne .Option.LimitMEMLOCK 0 }}LimitMEMLOCK={{.Option.LimitMEMLOCK}}{{end}}
+{{if .Option.LimitMEMLOCK }}LimitMEMLOCK={{.Option.LimitMEMLOCK}}{{end}}
+{{if .Option.LimitNOFILE }}LimitNOFILE={{.Option.LimitNOFILE}}{{end}}
+{{if .Option.LimitNPROC }}LimitNPROC={{.Option.LimitNPROC}}{{end}}
 {{if and .LogOutput .HasOutputFileSupport -}}
 StandardOutput=file:/var/log/{{.Name}}.out
 StandardError=file:/var/log/{{.Name}}.err
