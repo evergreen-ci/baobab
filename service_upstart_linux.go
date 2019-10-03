@@ -247,10 +247,10 @@ stop on runlevel [!2345]
 
 {{if and .UserName .HasSetUIDStanza}}setuid {{.UserName}}{{end}}
 
-{{if .Option.LimitAS }}limit as {{.Option.LimitAS}} {{.Option.LimitAS}}{{end}}
-{{if .Option.LimitMEMLOCK }}limit memlock {{.Option.LimitMEMLOCK}} {{.Option.LimitMEMLOCK}}{{end}}
-{{if .Option.LimitNOFILE }}limit nofile {{.Option.LimitNOFILE}} {{.Option.LimitNOFILE}}{{end}}
-{{if .Option.LimitNPROC }}limit nproc {{.Option.LimitNPROC}}{{.Option.LimitNPROC}}{{end}}
+{{if .Option.LimitLockedMemory }}limit memlock {{.Option.LimitLockedMemory}} {{.Option.LimitLockedMemory}}{{end}}
+{{if .Option.LimitNumFiles }}limit nofile {{.Option.LimitNumFiles}} {{.Option.LimitNumFiles}}{{end}}
+{{if .Option.LimitNumProcs }}limit nproc {{.Option.LimitNumProcs}} {{.Option.LimitNumProcs}}{{end}}
+{{if .Option.LimitVirtualMemory }}limit as {{.Option.LimitVirtualMemory}} {{.Option.LimitVirtualMemory}}{{end}}
 
 respawn
 respawn limit 10 5
