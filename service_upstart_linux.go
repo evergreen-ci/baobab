@@ -247,10 +247,10 @@ stop on runlevel [!2345]
 
 {{if and .UserName .HasSetUIDStanza}}setuid {{.UserName}}{{end}}
 
-{{range $name, $value := .Environment -}}
+{{- range $name, $value := .Environment}}
 env {{$name}}={{$value}}
 export {{$name}}
-{{end}}
+{{- end}}
 
 {{if .Option.LimitLockedMemory }}limit memlock {{.Option.LimitLockedMemory}} {{.Option.LimitLockedMemory}}{{end}}
 {{if .Option.LimitNumFiles }}limit nofile {{.Option.LimitNumFiles}} {{.Option.LimitNumFiles}}{{end}}

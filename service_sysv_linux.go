@@ -207,9 +207,9 @@ stdout_log="/var/log/$name.log"
 stderr_log="/var/log/$name.err"
 
 [ -e /etc/sysconfig/$name ] && . /etc/sysconfig/$name
-{{range $name, $value := .Environment -}}
+{{- range $name, $value := .Environment}}
 export {{$name}}={{$value}}
-{{end}}
+{{- end}}
 
 get_pid() {
     cat "$pid_file"
