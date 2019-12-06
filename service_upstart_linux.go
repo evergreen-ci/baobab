@@ -281,6 +281,6 @@ script
 		set +a
 	fi
 
-	exec {{if and .UserName (not .HasSetUIDStanza)}}sudo -E -u {{.UserName}}{{range $name, $value := .Environment}} {{$name}}="{{$value}}"{{end}}{{end}} {{.Path}}{{range .Arguments}} {{.|cmd}}{{end}}{{if .LogOutput}} >> $stdout_log 2>> $stderr_log{{end}}
+	exec {{if and .UserName (not .HasSetUIDStanza)}}sudo -E -u {{.UserName}}{{range $name, $value := .Environment}} {{$name}}={{$value}}{{end}}{{end}} {{.Path}}{{range .Arguments}} {{.|cmd}}{{end}}{{if .LogOutput}} >> $stdout_log 2>> $stderr_log{{end}}
 end script
 `
