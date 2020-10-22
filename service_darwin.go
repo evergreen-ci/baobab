@@ -294,6 +294,20 @@ var launchdConfig = `<?xml version='1.0' encoding='UTF-8'?>
 {{end}}</dict>
 {{end}}
 {{if .ProcessType}}<key>ProcessType</key><string>{{html .ProcessType}}</string>{{end}}
+{{if or .Option.LimitLockedMemory .Option.LimitNumFiles .Option.LimitNumProcs .Option.LimitVirtualMemory}}
+<key>HardResourceLimits</key>
+<dict>
+{{if .Options.LimitLockedMemory}}<string>MemoryLock</string><integer>{{.Options.LimitLockedMemory}}</integer>
+{{end}}{{if .Options.LimitNumFiles}}<string>NumberOfFiles</string><integer>{{.Options.LimitNumFiles}}</integer>
+{{end}}{{if .Options.LimitNumProcs}}<string>NumberOfProcesses</string><integer>{{.Options.LimitNumProcs}}</integer>
+{{end}}</dict>
+<key>SoftResourceLimits</key>
+<dict>
+{{if .Options.LimitLockedMemory}}<string>MemoryLock</string><integer>{{.Options.LimitLockedMemory}}</integer>
+{{end}}{{if .Options.LimitNumFiles}}<string>NumberOfFiles</string><integer>{{.Options.LimitNumFiles}}</integer>
+{{end}}{{if .Options.LimitNumProcs}}<string>NumberOfProcesses</string><integer>{{.Options.LimitNumProcs}}</integer>
+{{end}}</dict>
+{{end}}
 <key>SessionCreate</key><{{bool .SessionCreate}}/>
 <key>KeepAlive</key><{{bool .KeepAlive}}/>
 <key>RunAtLoad</key><{{bool .RunAtLoad}}/>
