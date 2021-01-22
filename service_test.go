@@ -2,19 +2,19 @@
 // Use of this source code is governed by a zlib-style
 // license that can be found in the LICENSE file.
 
-package service_test
+package baobab_test
 
 import (
 	"testing"
 	"time"
 
-	"github.com/evergreen-ci/service"
+	"github.com/evergreen-ci/baobab"
 )
 
 func TestRunInterrupt(t *testing.T) {
 	p := &program{}
-	sc := &service.Config{
-		Name: "go_service_test",
+	sc := &baobab.Config{
+		Name: "go_baobab_test",
 	}
 	s, err := service.New(p, sc)
 	if err != nil {
@@ -44,14 +44,14 @@ type program struct {
 	numStopped int
 }
 
-func (p *program) Start(s service.Service) error {
+func (p *program) Start(s baobab.Service) error {
 	go p.run()
 	return nil
 }
 func (p *program) run() {
 	// Do work here
 }
-func (p *program) Stop(s service.Service) error {
+func (p *program) Stop(s baobab.Service) error {
 	p.numStopped++
 	return nil
 }

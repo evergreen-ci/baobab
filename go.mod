@@ -1,4 +1,4 @@
-module github.com/evergreen-ci/service
+module github.com/evergreen-ci/baobab
 
 go 1.10
 

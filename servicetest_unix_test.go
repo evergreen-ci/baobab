@@ -4,7 +4,7 @@
 
 // +build darwin dragonfly freebsd linux nacl netbsd openbsd solaris
 
-package service_test
+package baobab_test
 
 import (
 	"os"

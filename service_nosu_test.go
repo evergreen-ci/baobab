@@ -4,7 +4,7 @@
 
 // +build !su
 
-package service_test
+package baobab_test
 
 import "testing"
 

@@ -10,14 +10,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/evergreen-ci/service"
+	"github.com/evergreen-ci/baobab"
 )
 
-var logger service.Logger
+var logger baobab.Logger
 
 type program struct{}
 
-func (p *program) Start(s service.Service) error {
+func (p *program) Start(s baobab.Service) error {
 	// Start should not block. Do the actual work async.
 	go p.run()
 	return nil
@@ -25,26 +25,26 @@ func (p *program) Start(s service.Service) error {
 func (p *program) run() {
 	// Do work here
 }
-func (p *program) Stop(s service.Service) error {
+func (p *program) Stop(s baobab.Service) error {
 	// Stop should not block. Return with a few seconds.
 	<-time.After(time.Second * 13)
 	return nil
 }
 
 func main() {
-	svcConfig := &service.Config{
+	svcConfig := &baobab.Config{
 		Name:        "GoServiceExampleStopPause",
 		DisplayName: "Go Service Example: Stop Pause",
 		Description: "This is an example Go service that pauses on stop.",
 	}
 
 	prg := &program{}
-	s, err := service.New(prg, svcConfig)
+	s, err := baobab.New(prg, svcConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
 	if len(os.Args) > 1 {
-		err = service.Control(s, os.Args[1])
+		err = baobob.Control(s, os.Args[1])
 		if err != nil {
 			log.Fatal(err)
 		}

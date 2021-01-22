@@ -10,10 +10,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/evergreen-ci/service"
+	"github.com/evergreen-ci/baobab"
 )
 
-var logger service.Logger
+var logger baobab.Logger
 
 // Program structures.
 //  Define Start and Stop methods.
@@ -21,8 +21,8 @@ type program struct {
 	exit chan struct{}
 }
 
-func (p *program) Start(s service.Service) error {
-	if service.Interactive() {
+func (p *program) Start(s baobab.Service) error {
+	if baobab.Interactive() {
 		logger.Info("Running in terminal.")
 	} else {
 		logger.Info("Running under service manager.")
@@ -34,7 +34,7 @@ func (p *program) Start(s service.Service) error {
 	return nil
 }
 func (p *program) run() error {
-	logger.Infof("I'm running %v.", service.Platform())
+	logger.Infof("I'm running %v.", baobab.Platform())
 	ticker := time.NewTicker(2 * time.Second)
 	for {
 		select {
@@ -46,7 +46,7 @@ func (p *program) run() error {
 		}
 	}
 }
-func (p *program) Stop(s service.Service) error {
+func (p *program) Stop(s baobab.Service) error {
 	// Any work in Stop should be quick, usually a few seconds at most.
 	logger.Info("I'm Stopping!")
 	close(p.exit)
@@ -63,10 +63,10 @@ func main() {
 	svcFlag := flag.String("service", "", "Control the system service.")
 	flag.Parse()
 
-	options := make(service.KeyValue)
+	options := make(baobab.KeyValue)
 	options["Restart"] = "on-success"
 	options["SuccessExitStatus"] = "1 2 8 SIGKILL"
-	svcConfig := &service.Config{
+	svcConfig := &baobab.Config{
 		Name:        "GoServiceExampleLogging",
 		DisplayName: "Go Service Example for Logging",
 		Description: "This is an example Go service that outputs log messages.",
@@ -77,7 +77,7 @@ func main() {
 	}
 
 	prg := &program{}
-	s, err := service.New(prg, svcConfig)
+	s, err := baobab.New(prg, svcConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -97,9 +97,9 @@ func main() {
 	}()
 
 	if len(*svcFlag) != 0 {
-		err := service.Control(s, *svcFlag)
+		err := baobab.Control(s, *svcFlag)
 		if err != nil {
-			log.Printf("Valid actions: %q\n", service.ControlAction)
+			log.Printf("Valid actions: %q\n", baobab.ControlAction)
 			log.Fatal(err)
 		}
 		return

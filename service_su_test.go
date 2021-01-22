@@ -5,7 +5,7 @@
 // This needs to be run as root/admin hence the reason there is a build tag
 // +build su
 
-package service_test
+package baobab_test
 
 import (
 	"flag"
@@ -18,7 +18,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/evergreen-ci/service"
+	"github.com/evergreen-ci/baobab"
 )
 
 const runAsServiceArg = "RunThisAsService"

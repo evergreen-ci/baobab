@@ -4,7 +4,7 @@
 
 // +build linux darwin
 
-package service
+package baobab
 
 import (
 	"fmt"

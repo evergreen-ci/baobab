@@ -2,7 +2,7 @@
 // Use of this source code is governed by a zlib-style
 // license that can be found in the LICENSE file.
 
-// Package service provides a simple way to create a system service.
+// Package baobab provides a simple way to create a system service.
 // Currently supports Windows, Linux/(systemd | Upstart | SysV), and OSX/Launchd.
 //
 // Windows controls services by setting up callbacks that is non-trivial. This
@@ -18,14 +18,14 @@
 //	import (
 //		"log"
 //
-//		"github.com/evergreen-ci/service"
+//		"github.com/evergreen-ci/baobab"
 //	)
 //
-//	var logger service.Logger
+//	var logger baobab.Logger
 //
 //	type program struct{}
 //
-//	func (p *program) Start(s service.Service) error {
+//	func (p *program) Start(s baobab.Service) error {
 //		// Start should not block. Do the actual work async.
 //		go p.run()
 //		return nil
@@ -33,20 +33,20 @@
 //	func (p *program) run() {
 //		// Do work here
 //	}
-//	func (p *program) Stop(s service.Service) error {
+//	func (p *program) Stop(s baobab.Service) error {
 //		// Stop should not block. Return with a few seconds.
 //		return nil
 //	}
 //
 //	func main() {
-//		svcConfig := &service.Config{
+//		svcConfig := &baobab.Config{
 //			Name:        "GoServiceTest",
 //			DisplayName: "Go Service Test",
 //			Description: "This is a test Go service.",
 //		}
 //
 //		prg := &program{}
-//		s, err := service.New(prg, svcConfig)
+//		s, err := baobab.New(prg, svcConfig)
 //		if err != nil {
 //			log.Fatal(err)
 //		}
@@ -59,7 +59,7 @@
 //			logger.Error(err)
 //		}
 //	}
-package service // import "github.com/evergreen-ci/service"
+package baobab // import "github.com/evergreen-ci/baobab"
 
 import (
 	"errors"

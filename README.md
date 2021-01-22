@@ -1,6 +1,6 @@
-# service [![GoDoc](https://godoc.org/github.com/evergreen-ci/service?status.svg)](https://godoc.org/github.com/evergreen-ci/service)
+# Baobab [![GoDoc](https://godoc.org/github.com/evergreen-ci/baobab?status.svg)](https://godoc.org/github.com/evergreen-ci/baobab)
 
-service will install / un-install, start / stop, and run a program as a service (daemon).
+baobab will install / un-install, start / stop, and run a program as a service (daemon).
 Currently supports Windows XP+, Linux/(systemd | Upstart | SysV), and OSX/Launchd.
 
 Windows controls services by setting up callbacks that is non-trivial. This
